@@ -1,12 +1,22 @@
 package kusu.trade.AuthService.services;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Component;
+import jakarta.security.auth.message.AuthException;
+import kusu.trade.AuthService.data.Role;
+import kusu.trade.AuthService.data.User;
+import kusu.trade.AuthService.repository.UserRepository;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-@Component
+
+@Service
+@RequiredArgsConstructor
 public class UserService {
+    private final UserRepository userRepository;
 
-    public UserDetailsService userDetailsService() {
-        return null;
+
+
+    public User getByLogin(@NonNull String login) throws AuthException {
+        return userRepository.getUserByLogin(login);
     }
 }
